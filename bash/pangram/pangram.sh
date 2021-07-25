@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 
-# The following comments should help you get started:
-# - Bash is flexible. You may use functions or write a "raw" script.
-#
-# - Complex code can be made easier to read by breaking it up
-#   into functions, however this is sometimes overkill in bash.
-#
-# - You can find links about good style and other resources
-#   for Bash in './README.md'. It came with this exercise.
-#
-#   Example:
-#   # other functions here
-#   # ...
-#   # ...
-#
-#   main () {
-#     # your main function code here
-#   }
-#
-#   # call main with all of the positional arguments
-#   main "$@"
-#
-# *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+# Convert input to lower case
+input="${1,,}"
+
+# Loop over a to z, change flag to 1 if a letter is missing
+flag=0
+for x in {a..z}
+do
+    if ! [[ $input = *$x* ]]; then
+        flag=1
+    fi
+done
+
+# If a letter was missing return 'false', else return 'true'
+if [ "${missing}" -eq 1 ]; then
+    echo "false"
+else
+    echo "true"
+fi
+
