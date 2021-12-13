@@ -35,7 +35,7 @@ bob () {
 }
 
 # Check is a question or not
-remove_whitespace="$( echo $1 | tr -d '\011\012\013\014\015\040')"
+remove_whitespace="$( echo "$1" | tr -d '\011\012\013\014\015\040')"
 if [[ "${remove_whitespace: -1}" == '?' ]]; then
     is_question=true
 else 
@@ -50,14 +50,14 @@ else
 fi 
 
 # Check if all upper case or not
-remove_special_chars="$( echo $1 | tr -dc '[:alpha:]')"
+remove_special_chars="$( echo "$1" | tr -dc '[:alpha:]')"
 if [[ "$remove_special_chars" =~ [A-z] ]]; then
     some_letters=true
 else
     some_letters=false
 fi
 
-if ($some_letters) && [ "$1" == "$( echo $1 | tr [a-z] [A-Z])" ]; then
+if ($some_letters) && [ "$1" == "$( echo "$1" | tr [a-z] [A-Z])" ]; then
     is_uppercase=true
 else
     is_uppercase=false
