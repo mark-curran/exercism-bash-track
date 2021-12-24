@@ -1,24 +1,68 @@
 #!/usr/bin/env bash
 
-# The following comments should help you get started:
-# - Bash is flexible. You may use functions or write a "raw" script.
-#
-# - Complex code can be made easier to read by breaking it up
-#   into functions, however this is sometimes overkill in bash.
-#
-# - You can find links about good style and other resources
-#   for Bash in './README.md'. It came with this exercise.
-#
-#   Example:
-#   # other functions here
-#   # ...
-#   # ...
-#
-#   main () {
-#     # your main function code here
-#   }
-#
-#   # call main with all of the positional arguments
-#   main "$@"
-#
-# *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+# Declare three arrays for odd, even and doubled characters
+odds=()
+evens=()
+doubles=()
+
+check_number() {
+    # Iterate over characters in first argument
+    for ((i=0; i<${#1}; i++)); do
+        number=${1:i:1}
+        polarity=$(( i % 2 ))
+        # echo "The iterator i is $i"
+        # echo "Number is $number"
+        # echo "Polarity is $polarity"
+        if [[ $polarity = 0 ]]; then
+            evens+=("$number")
+        else
+            odds+=("$number")
+        fi
+    done
+
+    for value in "${evens[@]}"
+    do
+        doubled_value=$(( value * 2 ))
+        doubled_minus_nine=$(( doubled_value - 9 ))
+        # echo "The value is $value"
+        # echo "The doubled_value is $doubled_value"
+        # echo "The doubled_minus_nine is $doubled_minus_nine"
+        if [[ $(( doubled_minus_nine )) > 0 ]]; then
+            doubles+=("$doubled_minus_nine")
+        else
+            doubles+=("$doubled_value")
+        fi
+    done
+
+    # Declare the sum, which starts at zero.
+    sum=0
+    # echo "Sum over odds."
+    for value in "${odds[@]}"
+    do
+        # echo "Value is $value"
+        sum=$((sum + value))
+    done
+    # echo "sum over doubles."
+    for value in "${doubles[@]}"
+    do
+        # echo "Value is $value"
+        sum=$((sum + value))
+    done
+
+    # echo "The sum is $sum."
+
+    if [[ ($((sum % 10)) != 0) ]]; then
+        echo "false"
+    else
+        echo "true"
+    fi
+}
+
+text_remove_characters="$( echo "$1" | tr -dc '0123456789 ')"
+text_numbers_only="$( echo "$1" | tr -dc '0123456789')"
+num_input_chars=${#text_numbers_only}
+if [[ ("$text_remove_characters" != "$1") || ($((num_input_chars)) == 1) ]]; then
+    echo "false"
+else
+    check_number "$text_numbers_only"
+fi
