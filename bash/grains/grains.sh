@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
 
-# The following comments should help you get started:
-# - Bash is flexible. You may use functions or write a "raw" script.
-#
-# - Complex code can be made easier to read by breaking it up
-#   into functions, however this is sometimes overkill in bash.
-#
-# - You can find links about good style and other resources
-#   for Bash in './README.md'. It came with this exercise.
-#
-#   Example:
-#   # other functions here
-#   # ...
-#   # ...
-#
-#   main () {
-#     # your main function code here
-#   }
-#
-#   # call main with all of the positional arguments
-#   main "$@"
-#
-# *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+# Return total if asked.
+if [[ "$1" == "total" ]]; then
+    echo "18446744073709551615"
+# 2^64 overflows my terminal, so hard code this response value. 
+elif [[ "$1" == "64" ]]; then
+    echo "9223372036854775808"
+# Return error if input is not an integer between 1 and 64 inclusive.
+elif [[ ( "$( echo $1 | tr -dc '0123456768')" != "$1") || ($(($1)) < 1) || ($(($1)) > 64)]]; then
+    echo "Error: invalid input"
+    exit 1
+else
+    echo "$((2**($1-1)))"
+fi
