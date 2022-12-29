@@ -1,5 +1,8 @@
-# Ignore workspace settings
+# Ignore workspace settings.
 .vscode/
+
+# Ignore symlinked .devcontainer.
+/.devcontainer
 
 # Ignore users bash history.
 .bash_history
