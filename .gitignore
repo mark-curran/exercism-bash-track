@@ -6,3 +6,11 @@
 
 # Ignore users bash history.
 .bash_history
+
+# exercism.io metadata
+.exercism/
+
+# sbt artefacts
+target/
+.bsp/
+project/
