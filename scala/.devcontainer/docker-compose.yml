@@ -1,0 +1,18 @@
+version: '3'
+services:
+  local:
+    build:
+      context: '.'
+      args:
+        SBT_VERSION: '1.8.0'
+        SCALA_VERSION: '3.2.1'
+    image: scala-local
+    volumes:
+      - ..:/workspace
+      # Mount to use a custom bash configuration.
+      - ./.inputrc:/root/.inputrc
+      - ./.git-prompt.sh:/root/.git-prompt.sh
+      - ./.git-completion.bash:/root/.git-completion.bash
+      - ./.bashrc:/root/.bashrc
+      # Mount to persist bash history on the host machine.
+      - ./.bash_history:/root/.bash_history

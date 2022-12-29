@@ -1,0 +1,12 @@
+
+{
+    // Instructions for the VSCode Remote-Containers extension.
+    "name": "Scala Local Container", // As appears in the VSC UI.
+    "dockerComposeFile": "./docker-compose.yml",
+    "runServices": [
+        "local"
+    ],
+    "service": "local",
+    "workspaceFolder": "/workspace",
+    "overrideCommand": true // Must be true in order to prevent container shutting down prematurely while VSC server is starting.
+}
