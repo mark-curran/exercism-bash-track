@@ -8,5 +8,20 @@
     ],
     "service": "local",
     "workspaceFolder": "/workspace",
-    "overrideCommand": true // Must be true in order to prevent container shutting down prematurely while VSC server is starting.
+	"overrideCommand": true, // Must be true in order to prevent container shutting down prematurely while VSC server is starting.
+	"customizations": {
+		"vscode": {
+            "extensions": [
+				"scalameta.metals"
+			],
+            "settings": {
+                // Controls if extensions are run inside the ui or in the workspace.
+                "remote.extensionKind": {
+                    "scalameta.metals": [
+                        "workspace"
+                    ]
+                }
+            }
+		}
+	} 
 }
