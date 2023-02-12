@@ -6,7 +6,7 @@ import org.scalatest.matchers.should.Matchers
 class TwoferTest extends AnyFunSuite with Matchers {
 
   test("no name given") {
-    Twofer.twofer() should be ("One for you, one for me.")
+    Twofer.twofer("") should be ("One for you, one for me.")
   }
 
   test("a name given") {
