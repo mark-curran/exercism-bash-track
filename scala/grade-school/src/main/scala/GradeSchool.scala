@@ -1,12 +1,23 @@
+import collection.mutable.Map
+
 class School {
+
   type DB = Map[Int, Seq[String]]
+  
+  var db: DB = Map()
 
-  def add(name: String, g: Int) = ???
+  def add(name: String, g: Int) = {
+    db.update(g, (grade(g) :+ name))
+  }
 
-  def db: DB = ???
+  def grade(g: Int): Seq[String] = {
+    db.getOrElse(g,Seq.empty)
+  }
 
-  def grade(g: Int): Seq[String] = ???
-
-  def sorted: DB = ???
+  def sorted: DB = {
+    // Sort db in place.
+    for (g <- db.keys) db.update(g, grade(g).sorted)
+    // Return the db.
+    db
+  }
 }
-
